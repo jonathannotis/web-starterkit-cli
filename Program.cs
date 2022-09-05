@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-
+﻿
 namespace WebStarterkit
 {
     public class WebStarterkit
@@ -9,6 +7,7 @@ namespace WebStarterkit
         {
 
             // <command name> <frontend> <backend> <appname> -pkg <packages> --typescript --yarn
+            // dotnet run react flask myapp -pkg react-redux react-router-dom --typescript
 
             string frontend = args[0];
             string backend = args[1];
@@ -24,6 +23,15 @@ namespace WebStarterkit
                 Console.WriteLine(package); // prints out each package
 
             });
+
+            // create project directories
+            System.IO.Directory.CreateDirectory(directoryName);
+            System.IO.Directory.CreateDirectory(directoryName + "/frontend");
+            System.IO.Directory.CreateDirectory(directoryName + "/backend");
+
+            // this is temporary. replace with a switch statements for frontend/backend
+            ReactDeploy reactDeploy = packages == null ? new ReactDeploy(packages, directoryName, typescript, yarn) : new ReactDeploy(directoryName, typescript, yarn);
+            reactDeploy.CreateApp();
 
             // Regex for dash then letter is -[a-zA-z]
 
