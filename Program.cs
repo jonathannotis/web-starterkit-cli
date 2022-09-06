@@ -25,9 +25,19 @@ namespace WebStarterkit
             System.IO.Directory.CreateDirectory(directoryName + "/frontend");
             System.IO.Directory.CreateDirectory(directoryName + "/backend");
 
-            // this is temporary. replace with a switch statements for frontend/backend
-            ReactDeploy reactDeploy = new ReactDeploy(packages, frontend.Equals("next"), directoryName, typescript, yarn);
-            reactDeploy.CreateApp();
+
+            switch (frontend)
+            {
+                case "react":
+                    ReactDeploy reactDeploy = new ReactDeploy(packages, false, directoryName, typescript, yarn);
+                    reactDeploy.CreateApp();
+                    break;
+                case "next":
+                    ReactDeploy nextDeploy = new ReactDeploy(packages, true, directoryName, typescript, yarn);
+                    nextDeploy.CreateApp();
+                    break;
+            }
+
 
             // Regex for dash then letter is -[a-zA-z]
 
