@@ -11,6 +11,7 @@ namespace WebStarterkit
         private bool typescript;
         private bool yarn;
 
+
         public ReactDeploy(List<string>? packages, string directoryName, bool typescript, bool yarn)
         {
             this.packages = packages;
@@ -36,14 +37,16 @@ namespace WebStarterkit
                 System.IO.File.Copy("assets/react/react-tsconfig.json", directoryName + "/frontend/tsconfig.json", true);
             }
 
-            // everything else is working as should besides this npm install bit
-            HelperMethods.RunShellCommand("cd " + directoryName + "/frontend");
-            HelperMethods.RunShellCommand(yarn ? "yarn install" : "npm install");
+            // need to run commands all at once to stay in proper directory
+            string command = "cd " + directoryName + "/frontend && " + (yarn ? "yarn install" : "npm install");
 
             packages?.ForEach(package =>
             {
-                HelperMethods.RunShellCommand(yarn ? "yarn add " + package : "npm install " + package);
+                command = command + (yarn ? (" && yarn add " + package) : (" && npm install " + package));
             });
+
+            HelperMethods.RunShellCommand(command);
+
         }
 
     }

@@ -13,6 +13,9 @@ namespace WebStarterkit
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.Start();
+            proc.WaitForExit();
+            Console.WriteLine(proc.StandardOutput.ReadToEnd());
+
         }
 
         // via https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories

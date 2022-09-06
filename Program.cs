@@ -18,11 +18,7 @@ namespace WebStarterkit
 
 
             List<string>? packages = args[3].Equals("-pkg") ? GetPackages(args) : null;
-            packages?.ForEach(package =>
-            {
-                Console.WriteLine(package); // prints out each package
 
-            });
 
             // create project directories
             System.IO.Directory.CreateDirectory(directoryName);
@@ -30,7 +26,7 @@ namespace WebStarterkit
             System.IO.Directory.CreateDirectory(directoryName + "/backend");
 
             // this is temporary. replace with a switch statements for frontend/backend
-            ReactDeploy reactDeploy = packages == null ? new ReactDeploy(packages, directoryName, typescript, yarn) : new ReactDeploy(directoryName, typescript, yarn);
+            ReactDeploy reactDeploy = packages == null ? new ReactDeploy(directoryName, typescript, yarn) : new ReactDeploy(packages, directoryName, typescript, yarn);
             reactDeploy.CreateApp();
 
             // Regex for dash then letter is -[a-zA-z]
