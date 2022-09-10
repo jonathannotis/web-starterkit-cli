@@ -29,18 +29,16 @@ namespace WebStarterkit
             switch (frontend)
             {
                 case "react":
-                    ReactDeploy reactDeploy = new ReactDeploy(packages, false, directoryName, typescript, yarn);
-                    reactDeploy.CreateApp();
+                    FrontendConfig.CreateReactApp(packages, false, directoryName, typescript, yarn);
                     break;
                 case "next":
-                    ReactDeploy nextDeploy = new ReactDeploy(packages, true, directoryName, typescript, yarn);
-                    nextDeploy.CreateApp();
+                    FrontendConfig.CreateReactApp(packages, true, directoryName, typescript, yarn);
                     break;
                 case "sveltekit":
-                    SvelteKitDeploy svelteKitDeploy = new SvelteKitDeploy(packages, directoryName, typescript, yarn);
+                    FrontendConfig.CreateSvelteApp(packages, directoryName, typescript, yarn);
                     break;
                 case "vue":
-                    VueDeploy vueDeploy = new VueDeploy(packages, directoryName, typescript, yarn);
+                    FrontendConfig.CreateVueApp(packages, directoryName, typescript, yarn);
                     break;
 
             }
