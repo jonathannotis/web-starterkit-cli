@@ -36,6 +36,13 @@ namespace WebStarterkit
                     ReactDeploy nextDeploy = new ReactDeploy(packages, true, directoryName, typescript, yarn);
                     nextDeploy.CreateApp();
                     break;
+                case "sveltekit":
+                    SvelteKitDeploy svelteKitDeploy = new SvelteKitDeploy(packages, directoryName, typescript, yarn);
+                    break;
+                case "vue":
+                    VueDeploy vueDeploy = new VueDeploy(packages, directoryName, typescript, yarn);
+                    break;
+
             }
 
 
