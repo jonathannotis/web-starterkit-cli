@@ -25,7 +25,7 @@ namespace WebStarterkit
 
         }
 
-        // add nuxt: https://nuxtjs.org/docs/get-started/installation
+
         public static void CreateVueApp(List<string>? packages, string directoryName, bool typescript, bool yarn)
         {
             HelperMethods.CopyDirectory(typescript ? "assets/vue/vuew-boilerplate-ts" : "assets/vue/vue-boilerplate", directoryName + "/frontend", true);
@@ -41,6 +41,7 @@ namespace WebStarterkit
             HelperMethods.RunShellCommand(command);
 
         }
+
         public static void CreateSvelteApp(List<string>? packages, string directoryName, bool typescript, bool yarn)
         {
             HelperMethods.CopyDirectory(typescript ? "assets/sveltekit/sveltekit-boilerplate-ts" : "assets/sveltekit/sveltekit-boilerplate", directoryName + "/frontend", true);

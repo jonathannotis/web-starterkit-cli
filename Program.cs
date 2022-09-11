@@ -15,6 +15,8 @@ namespace WebStarterkit
 
             bool typescript = args.Contains("--typescript"); // typescript/javascript
             bool yarn = args.Contains("--yarn"); // yarn/npm
+            bool scss = args.Contains("--scss"); // scss/css
+
 
 
             List<string>? packages = args[3].Equals("-pkg") ? GetPackages(args) : null;
