@@ -1,6 +1,19 @@
 ﻿
 namespace WebStarterkit
 {
+    public class Package
+    {
+
+        public string name;
+        public bool devDependency;
+
+        public Package(string name, bool devDependency)
+        {
+            this.name = name;
+            this.devDependency = devDependency;
+        }
+    }
+
     public class WebStarterkit
     {
         public static void Main(string[] args)
@@ -19,7 +32,7 @@ namespace WebStarterkit
 
 
 
-            List<string>? packages = args[3].Equals("-pkg") ? GetPackages(args) : null;
+            List<Package>? packages = args[3].Equals("--packages") ? GetPackages(args) : null;
 
 
             // create project directories
@@ -42,24 +55,34 @@ namespace WebStarterkit
                 case "vue":
                     FrontendConfig.CreateVueApp(packages, directoryName, typescript, yarn);
                     break;
-
             }
+
+            // we can use this or a try/catch (should be used in switch )
+            string pythonShell = HelperMethods.RunShellCommand("python3 --version").IndexOf("Python") == 0 ? "python3" : "python";
+
 
 
             // Regex for dash then letter is -[a-zA-z]
 
         }
 
-        private static List<string> GetPackages(string[] args)
+        private static List<Package> GetPackages(string[] args)
         {
-            List<string> packages = new List<string>();
+            List<Package> packages = new List<Package>();
+            bool devDependency = false;
             for (int i = 4; i < args.Length; i++)
             {
                 if (args[i].Contains("--"))
                 {
                     break;
                 }
-                packages.Add(args[i]);
+                else if (args[i].Equals("-D"))
+                {
+                    devDependency = true;
+                    continue;
+                }
+                packages.Add(new Package(args[i], devDependency));
+                devDependency = false;
             }
 
             return packages;

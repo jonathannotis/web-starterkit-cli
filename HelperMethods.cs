@@ -5,7 +5,8 @@ namespace WebStarterkit
 {
     public class HelperMethods
     {
-        public static void RunShellCommand(string command)
+        // returning a string in case output is needed
+        public static string RunShellCommand(string command)
         {
             Process proc = new System.Diagnostics.Process();
             proc.StartInfo.FileName = "/bin/bash";
@@ -15,8 +16,12 @@ namespace WebStarterkit
             proc.Start();
             proc.WaitForExit();
             Console.WriteLine(proc.StandardOutput.ReadToEnd());
+            return proc.StandardOutput.ReadToEnd();
 
         }
+
+
+
 
         // via https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
         public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
