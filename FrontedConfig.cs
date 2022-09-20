@@ -28,6 +28,8 @@ namespace WebStarterkit
                 }
             });
 
+
+
             HelperMethods.RunShellCommand(command);
 
         }
@@ -35,7 +37,7 @@ namespace WebStarterkit
 
         public static void CreateVueApp(List<Package>? packages, string directoryName, bool typescript, bool yarn)
         {
-            HelperMethods.CopyDirectory(typescript ? "assets/vue/vuew-boilerplate-ts" : "assets/vue/vue-boilerplate", directoryName + "/frontend", true);
+            HelperMethods.CopyDirectory(typescript ? "assets/vue/vue-boilerplate-ts" : "assets/vue/vue-boilerplate", directoryName + "/frontend", true);
 
 
             string command = "cd " + directoryName + "/frontend && " + (yarn ? "yarn install" : "npm install");
@@ -59,6 +61,29 @@ namespace WebStarterkit
         public static void CreateSvelteApp(List<Package>? packages, string directoryName, bool typescript, bool yarn)
         {
             HelperMethods.CopyDirectory(typescript ? "assets/sveltekit/sveltekit-boilerplate-ts" : "assets/sveltekit/sveltekit-boilerplate", directoryName + "/frontend", true);
+
+
+            string command = "cd " + directoryName + "/frontend && " + (yarn ? "yarn install" : "npm install");
+
+            packages?.ForEach(package =>
+            {
+                if (package.devDependency)
+                {
+                    command += (yarn ? (" && yarn add -D " + package.name) : (" && npm install " + package.name + " --save-dev"));
+                }
+                else
+                {
+                    command += (yarn ? (" && yarn add " + package.name) : (" && npm install " + package.name + " --save-dev"));
+                }
+            });
+
+            HelperMethods.RunShellCommand(command);
+
+        }
+
+        public static void CreateAngularApp(List<Package>? packages, string directoryName, bool yarn, bool sass)
+        {
+            HelperMethods.CopyDirectory(sass ? "assets/angular/angular-boilerplate-sass" : "assets/angular/angular-boilerplate-css", directoryName + "/frontend", true);
 
 
             string command = "cd " + directoryName + "/frontend && " + (yarn ? "yarn install" : "npm install");

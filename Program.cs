@@ -28,12 +28,11 @@ namespace WebStarterkit
 
             bool typescript = args.Contains("--typescript"); // typescript/javascript
             bool yarn = args.Contains("--yarn"); // yarn/npm
-            bool scss = args.Contains("--scss"); // scss/css
+            bool sass = args.Contains("--sass"); // sass/css
 
 
 
-            List<Package>? packages = args[3].Equals("--packages") ? GetPackages(args) : null;
-
+            List<Package>? packages = args[3].Equals("-packages") ? GetPackages(args) : null;
 
             // create project directories
             System.IO.Directory.CreateDirectory(directoryName);
@@ -55,6 +54,13 @@ namespace WebStarterkit
                 case "vue":
                     FrontendConfig.CreateVueApp(packages, directoryName, typescript, yarn);
                     break;
+                case "angular":
+                    FrontendConfig.CreateAngularApp(packages, directoryName, yarn, sass);
+                    break;
+                case "flutter":
+                    FrontendConfig.CreateFlutterApp(packages, directoryName);
+                    break;
+
             }
 
             // we can use this or a try/catch (should be used in switch )
