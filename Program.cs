@@ -19,8 +19,8 @@ namespace WebStarterkit
         public static void Main(string[] args)
         {
 
-            // <command name> <frontend> <backend> <appname> -pkg <packages> --typescript --yarn
-            // dotnet run react flask myapp -pkg react-redux react-router-dom --typescript
+            // <command name> <frontend> <backend> <appname> -packages <packages> --typescript --yarn
+            // dotnet run react flask myapp -packages react-redux react-router-dom --typescript
 
             string frontend = args[0];
             string backend = args[1];
@@ -62,10 +62,6 @@ namespace WebStarterkit
                     break;
 
             }
-
-            // we can use this or a try/catch (should be used in switch )
-            string pythonShell = HelperMethods.RunShellCommand("python3 --version").IndexOf("Python") == 0 ? "python3" : "python";
-
 
 
             // Regex for dash then letter is -[a-zA-z]
