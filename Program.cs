@@ -1,4 +1,5 @@
-﻿
+﻿using WebStarterkit.CliConfig;
+
 namespace WebStarterkit
 {
     public class Package

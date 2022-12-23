@@ -1,4 +1,4 @@
-namespace WebStarterkit
+namespace WebStarterkit.CliConfig
 {
     public class BackendConfig
     {
