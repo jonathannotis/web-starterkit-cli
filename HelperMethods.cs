@@ -1,3 +1,5 @@
+// Installer packages:
+// https://learn.microsoft.com/en-us/windows/msix/app-installer/how-to-create-appinstaller-file
 
 using System.Diagnostics;
 

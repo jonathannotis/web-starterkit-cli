@@ -81,9 +81,9 @@ namespace WebStarterkit
 
         }
 
-        public static void CreateAngularApp(List<Package>? packages, string directoryName, bool yarn, bool sass)
+        public static void CreateAngularApp(List<Package>? packages, string directoryName, bool yarn)
         {
-            HelperMethods.CopyDirectory(sass ? "assets/angular/angular-boilerplate-sass" : "assets/angular/angular-boilerplate-css", directoryName + "/frontend", true);
+            HelperMethods.CopyDirectory("assets/angular/angular-boilerplate-sass", directoryName + "/frontend", true);
 
 
             string command = "cd " + directoryName + "/frontend && " + (yarn ? "yarn install" : "npm install");

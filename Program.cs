@@ -28,7 +28,7 @@ namespace WebStarterkit
 
             bool typescript = args.Contains("--typescript"); // typescript/javascript
             bool yarn = args.Contains("--yarn"); // yarn/npm
-            bool sass = args.Contains("--sass"); // sass/css
+
 
 
 
@@ -55,7 +55,7 @@ namespace WebStarterkit
                     FrontendConfig.CreateVueApp(packages, directoryName, typescript, yarn);
                     break;
                 case "angular":
-                    FrontendConfig.CreateAngularApp(packages, directoryName, yarn, sass);
+                    FrontendConfig.CreateAngularApp(packages, directoryName, yarn);
                     break;
                 case "flutter":
                     FrontendConfig.CreateFlutterApp(packages, directoryName);
