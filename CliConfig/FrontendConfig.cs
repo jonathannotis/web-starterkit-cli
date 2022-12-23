@@ -60,7 +60,7 @@ namespace WebStarterkit.CliConfig
 
         public static void CreateSvelteApp(List<Package>? packages, string directoryName, bool typescript, bool yarn)
         {
-            HelperMethods.CopyDirectory(typescript ? "assets/sveltekit/sveltekit-boilerplate-ts" : "assets/sveltekit/sveltekit-boilerplate", directoryName + "/frontend", true);
+            HelperMethods.CopyDirectory(typescript ? "assets/svelte/svelte-boilerplate-ts" : "assets/svelte/svelte-boilerplate", directoryName + "/frontend", true);
 
 
             string command = "cd " + directoryName + "/frontend && " + (yarn ? "yarn install" : "npm install");
