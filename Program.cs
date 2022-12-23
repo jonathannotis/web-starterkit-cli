@@ -29,6 +29,8 @@ namespace WebStarterkit
 
             bool typescript = args.Contains("--typescript"); // typescript/javascript
             bool yarn = args.Contains("--yarn"); // yarn/npm
+            bool mysql = args.Contains("--mysql"); // mysql/mongodb
+
 
 
 
