@@ -1,6 +1,6 @@
 
 
-namespace WebStarterkit
+namespace WebStarterkit.CliConfig
 {
     public class FrontendConfig
     {

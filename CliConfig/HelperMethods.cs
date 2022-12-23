@@ -3,7 +3,7 @@
 
 using System.Diagnostics;
 
-namespace WebStarterkit
+namespace WebStarterkit.CliConfig
 {
     public class HelperMethods
     {
