@@ -2,6 +2,9 @@ const express = require("express");
 const userControllers = require("../controllers/userControllers");
 const router = express.Router();
 
+// @route GET && POST - /posts/
+
+//Post Method
 router.post("/post", (req, res) => {
 	userControllers.createNewUser(req, res);
 });
