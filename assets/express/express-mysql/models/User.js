@@ -31,6 +31,12 @@ class User {
 
 		return db.execute(sql);
 	}
+
+	static deleteById(id) {
+		let sql = `DELETE * FROM user WHERE user_id = ${id};`;
+
+		return db.execute(sql);
+	}
 }
 
 module.exports = User;
