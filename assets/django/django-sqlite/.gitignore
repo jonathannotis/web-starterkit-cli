@@ -1,0 +1,9 @@
+.DS_Store
+/.coverage
+/dist/
+/build/
+/MANIFEST
+/venv
+/.cache/
+/.pytest_cache/
+.vscode

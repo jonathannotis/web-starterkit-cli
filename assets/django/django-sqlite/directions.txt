@@ -10,7 +10,7 @@ Change the DATABASES and ALLOWED_HOSTS variables in settings.py for your proper 
 Run the following commands:
     python manage.py makemigrations
     python manage.py migrate
-
+    python manage.py migrate --run-syncdb
 
 Create a super user for your Django API:
     python manage.py createsuperuser
