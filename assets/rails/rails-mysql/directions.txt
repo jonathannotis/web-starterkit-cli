@@ -1,0 +1,13 @@
+Open the file config/database.yml and fill in your database info.
+
+Run the following commands to create the database and set up the basic 
+structure for the application:
+    rails db:create
+    rails db:migrate
+
+To create scaffold code for your project, run the following command/
+change for your specific data model:
+    rails generate scaffold User email:string first_name:string last_name:string
+    
+Run the following command to start the Rails development server:
+    rails server
