@@ -1,0 +1,17 @@
+WARNING: Some private information that should be hidden during production is exposed in this template. 
+         The use of environment variables or other solutions are strongly reccomended.
+
+Create a new secret key in settings.py with the following code to generate the new key:
+    from django.core.management.utils import get_random_secret_key
+    print(get_random_secret_key())
+
+Change the DATABASES and ALLOWED_HOSTS variables in settings.py for your proper information
+
+Run the following commands:
+    python manage.py migrate
+
+Create a super user for your Django API:
+    python manage.py createsuperuser
+
+To locally run the project:
+    python manage.py runserver
