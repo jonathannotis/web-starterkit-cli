@@ -1,10 +1,10 @@
-﻿using WebStarterkit.CliConfig;
+﻿using System.Text.RegularExpressions;
+using WebStarterkit.CliConfig;
 
 namespace WebStarterkit
 {
     public class Package
     {
-
         public string name;
         public bool devDependency;
 
@@ -20,7 +20,7 @@ namespace WebStarterkit
         public static void Main(string[] args)
         {
 
-            // <command name> <frontend> <backend> <appname> -packages <packages> --typescript --yarn
+            // <command name> <frontend> <backend> <appname> -p <dependencies> -P <devDependencies> -d <database> --typescript --yarn
             // dotnet run react flask myapp -packages react-redux react-router-dom --typescript
 
             string frontend = args[0];
@@ -29,13 +29,11 @@ namespace WebStarterkit
 
             bool typescript = args.Contains("--typescript"); // typescript/javascript
             bool yarn = args.Contains("--yarn"); // yarn/npm
-            bool mysql = args.Contains("--mysql"); // mysql/mongodb
 
+            Tuple<List<Package>, string> flags = GetFlags(args);
 
-
-
-
-            List<Package>? packages = args[3].Equals("-packages") ? GetPackages(args) : null;
+            string database = flags.Item2; // sqlite/mongodb/mysql
+            List<Package> packages = flags.Item1;
 
             // create project directories
             System.IO.Directory.CreateDirectory(directoryName);
@@ -63,34 +61,75 @@ namespace WebStarterkit
                 case "flutter":
                     FrontendConfig.CreateFlutterApp(packages, directoryName);
                     break;
-
+                default:
+                    // Print smth to console
+                    break;
             }
-
-
-            // Regex for dash then letter is -[a-zA-z]
+            switch (backend)
+            {
+                case "express":
+                    BackendConfig.CreateExpress(directoryName, yarn, database);
+                    break;
+                case "flask":
+                    BackendConfig.CreateFlask(directoryName, database);
+                    break;
+                case "django":
+                    BackendConfig.CreateDjango(directoryName, database);
+                    break;
+                case "rails":
+                    BackendConfig.CreateRails(directoryName, database);
+                    break;
+                default:
+                    // Print smth to console
+                    break;
+            }
 
         }
 
-        private static List<Package> GetPackages(string[] args)
+        private static Tuple<List<Package>, string> GetFlags(string[] args)
         {
+
             List<Package> packages = new List<Package>();
-            bool devDependency = false;
-            for (int i = 4; i < args.Length; i++)
+            string database = "";
+            bool atDependencies = false;
+            bool atDevDependencies = false;
+
+            for (int i = 0; i < args.Length; i++)
             {
                 if (args[i].Contains("--"))
                 {
-                    break;
-                }
-                else if (args[i].Equals("-D"))
-                {
-                    devDependency = true;
+                    atDependencies = false;
+                    atDevDependencies = false;
                     continue;
                 }
-                packages.Add(new Package(args[i], devDependency));
-                devDependency = false;
+                else if (Regex.Match(args[i], @"^-d$", RegexOptions.None).Success)
+                {
+                    atDependencies = false;
+                    atDevDependencies = false;
+                    i++;
+                    database = args[i];
+                    continue;
+                }
+                else if (Regex.Match(args[i], @"^-p$", RegexOptions.None).Success)
+                {
+                    atDependencies = true;
+                    atDevDependencies = false;
+                    continue;
+                }
+                else if (Regex.Match(args[i], @"^-P$", RegexOptions.None).Success)
+                {
+                    atDevDependencies = true;
+                    atDependencies = false;
+                    continue;
+                }
+                else if (atDependencies || atDevDependencies)
+                {
+                    packages.Add(new Package(args[i], atDevDependencies));
+                }
+
             }
 
-            return packages;
+            return new Tuple<List<Package>, string>(packages, database);
         }
     }
 }

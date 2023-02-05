@@ -4,7 +4,7 @@ namespace WebStarterkit.CliConfig
 {
     public class FrontendConfig
     {
-        public static void CreateReactApp(List<Package>? packages, bool useNextjs, string directoryName, bool typescript, bool yarn)
+        public static void CreateReactApp(List<Package> packages, bool useNextjs, string directoryName, bool typescript, bool yarn)
         {
             HelperMethods.CopyDirectory(useNextjs ? "assets/react/next-boilerplate" : "assets/react/react-boilerplate", directoryName + "/frontend", true);
 
@@ -35,7 +35,7 @@ namespace WebStarterkit.CliConfig
         }
 
 
-        public static void CreateVueApp(List<Package>? packages, string directoryName, bool typescript, bool yarn)
+        public static void CreateVueApp(List<Package> packages, string directoryName, bool typescript, bool yarn)
         {
             HelperMethods.CopyDirectory(typescript ? "assets/vue/vue-boilerplate-ts" : "assets/vue/vue-boilerplate", directoryName + "/frontend", true);
 
@@ -58,7 +58,7 @@ namespace WebStarterkit.CliConfig
 
         }
 
-        public static void CreateSvelteApp(List<Package>? packages, string directoryName, bool typescript, bool yarn)
+        public static void CreateSvelteApp(List<Package> packages, string directoryName, bool typescript, bool yarn)
         {
             HelperMethods.CopyDirectory(typescript ? "assets/svelte/svelte-boilerplate-ts" : "assets/svelte/svelte-boilerplate", directoryName + "/frontend", true);
 
@@ -81,7 +81,7 @@ namespace WebStarterkit.CliConfig
 
         }
 
-        public static void CreateAngularApp(List<Package>? packages, string directoryName, bool yarn)
+        public static void CreateAngularApp(List<Package> packages, string directoryName, bool yarn)
         {
             HelperMethods.CopyDirectory("assets/angular/angular-boilerplate-sass", directoryName + "/frontend", true);
 
@@ -104,7 +104,7 @@ namespace WebStarterkit.CliConfig
 
         }
 
-        public static void CreateFlutterApp(List<Package>? packages, string directoryName)
+        public static void CreateFlutterApp(List<Package> packages, string directoryName)
         {
             HelperMethods.CopyDirectory("assets/flutter", directoryName + "/frontend", true);
 
