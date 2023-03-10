@@ -49,7 +49,7 @@ namespace WebStarterkit
                 case "next":
                     FrontendConfig.CreateReactApp(packages, true, directoryName, typescript, yarn);
                     break;
-                case "sveltekit":
+                case "svelte":
                     FrontendConfig.CreateSvelteApp(packages, directoryName, typescript, yarn);
                     break;
                 case "vue":
