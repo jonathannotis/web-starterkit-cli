@@ -29,7 +29,7 @@ def user_by_id(id):
     elif request.method in ['PUT', 'POST']:
         body = request.get_json(force = True)
         resp = db.update_user(id, body)
-    elif request.method == ['DELETE']:
+    elif request.method == 'DELETE':
         resp = db.delete_user(id)
     return resp
 
