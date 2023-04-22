@@ -28,7 +28,7 @@ def user_by_id(id):
     # Note that POST and PUT are the same operation here because threre's an id filter.
     elif request.method in ['PUT', 'POST']:
         body = request.get_json(force = True)
-        resp = db.update_user(id)
+        resp = db.update_user(id, body)
     elif request.method == ['DELETE']:
         resp = db.delete_user(id)
     return resp

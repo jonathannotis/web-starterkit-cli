@@ -15,4 +15,14 @@ def add_user(email, first_name, last_name):
         return ValueError()
     return db.users.insert_one({'email': email, 'first_name': first_name, 'last_name': last_name})
 
-def update_user()
+def update_user(id, update):
+    if (id == None):
+        return ValueError()
+    query = { "_id": id }
+    newvalue = { "$set": update }
+    return db.update_one(query, newvalue)
+
+def delete_user(id):
+    if (id == None):
+        return ValueError()
+    return db.delete_one({ "_id": id })
