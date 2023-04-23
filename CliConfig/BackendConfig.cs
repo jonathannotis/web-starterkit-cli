@@ -13,9 +13,7 @@ namespace WebStarterkit.CliConfig
                     HelperMethods.CopyDirectory("assets/express/express-mongodb", directoryName + "/backend", true);
                     break;
                 default:
-                    // https://www.sqlitetutorial.net/sqlite-nodejs/connect/
                     HelperMethods.CopyDirectory("assets/express/express-sqlite", directoryName + "/backend", true);
-                    // sqlite
                     break;
             }
 
@@ -62,7 +60,8 @@ namespace WebStarterkit.CliConfig
             switch (database)
             {
                 case "mysql":
-                    HelperMethods.CopyDirectory("assets/flask/flask-mysql", directoryName + "/backend", true);
+                    Console.WriteLine("MySql is not yet supported for Flask. Using Sqlite instead.");
+                    HelperMethods.CopyDirectory("assets/flask/flask-sqlite", directoryName + "/backend", true);
                     break;
                 case "mongodb":
                     HelperMethods.CopyDirectory("assets/flask/flask-mongodb", directoryName + "/backend", true);

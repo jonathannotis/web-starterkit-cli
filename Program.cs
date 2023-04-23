@@ -15,13 +15,13 @@ namespace WebStarterkit
         }
     }
 
+    /*
+    Primary configuration class for the cli
+    */
     public class WebStarterkit
     {
         public static void Main(string[] args)
         {
-
-            // <command name> <frontend> <backend> <appname> -p <dependencies> -P <devDependencies> -d <database> --typescript --yarn
-            // dotnet run react flask myapp -packages react-redux react-router-dom --typescript
 
             string frontend = args[0];
             string backend = args[1];
@@ -40,7 +40,7 @@ namespace WebStarterkit
             System.IO.Directory.CreateDirectory(directoryName + "/frontend");
             System.IO.Directory.CreateDirectory(directoryName + "/backend");
 
-
+            // Handle frontend input
             switch (frontend)
             {
                 case "react":
@@ -62,9 +62,11 @@ namespace WebStarterkit
                     FrontendConfig.CreateFlutterApp(packages, directoryName);
                     break;
                 default:
-                    // Print smth to console
+                    HelperMethods.RunShellCommand("echo -e \"\033[31;47mYou entered an unsupported frontend frameowork. The program will continue configuration.\033[0m\"");
                     break;
             }
+
+            // Handle backend input
             switch (backend)
             {
                 case "express":
@@ -80,12 +82,13 @@ namespace WebStarterkit
                     BackendConfig.CreateRails(directoryName, database);
                     break;
                 default:
-                    // Print smth to console
+                    HelperMethods.RunShellCommand("echo -e \"\033[31;47mYou entered an unsupported backend frameowork.\033[0m\"");
                     break;
             }
-
+            HelperMethods.RunShellCommand("echo -e \"\033[31;47mThank you. Your project is fully configured. If you have any issues please report them on Github at https://github.com/jonathannotis/web-starterkit-cli\033[0m\"");
         }
 
+        // Retrieves and organizes args that do not have a fixed index in the command 
         private static Tuple<List<Package>, string> GetFlags(string[] args)
         {
 

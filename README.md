@@ -37,6 +37,7 @@ web-starterkit-cli <frontend> <backend> <appname> -p <dependencies> -P <devDepen
 - **Note:** Databases are not created with this command, the REST frameworks are configured with the databases
 - [`mongodb`](https://www.mongodb.com/)
 - [`mysql`](https://www.mysql.com/)
+  - **Note:** MySql is not yet supported for Flask
 - [`sqlite`](https://www.sqlite.org/index.html) _(default)_
 
 ## **Other Options**
