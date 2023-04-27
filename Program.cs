@@ -22,8 +22,9 @@ namespace WebStarterkit
     {
         public static void Main(string[] args)
         {
-            string? homebrewCellarPath = Environment.GetEnvironmentVariable("HOMEBREW_CELLAR");
-            string? baseDirectory = Path.Combine(homebrewCellarPath, "webstart", "1.0.1");
+            string homebrewCellarPath = "/usr/local/Cellar/";
+
+            string baseDirectory = Path.Combine(homebrewCellarPath, "webstarter", "1.0.1");
 
             string frontend = args[0];
             string backend = args[1];
