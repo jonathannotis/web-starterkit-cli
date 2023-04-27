@@ -3,13 +3,13 @@
 ## Install
 
 ```
-brew [command]
+brew install webstarter
 ```
 
 ## Usage
 
 ```
-web-starterkit-cli <frontend> <backend> <appname> -p <dependencies> -P <devDependencies> -d <database> --typescript --yarn
+webstarter <frontend> <backend> <appname> -p <dependencies> -P <devDependencies> -d <database> --typescript --yarn
 ```
 
 ## **Frontend Options**
