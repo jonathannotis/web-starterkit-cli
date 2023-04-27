@@ -6,11 +6,11 @@ namespace WebStarterkit.CliConfig
     {
         public static void CreateReactApp(List<Package> packages, bool useNextjs, string directory, string assetsPath, bool typescript, bool yarn)
         {
-            HelperMethods.CopyDirectory(useNextjs ? assetsPath + "react/next-boilerplate" : assetsPath + "react/react-boilerplate", directory + "/frontend", true);
+            HelperMethods.CopyDirectory(useNextjs ? assetsPath + "/react/next-boilerplate" : assetsPath + "/react/react-boilerplate", directory + "/frontend", true);
 
             if (typescript)
             {
-                System.IO.File.Copy(useNextjs ? assetsPath + "react/next-tsconfig.json" : assetsPath + "react/react-tsconfig.json", directory + "/frontend/tsconfig.json", true);
+                System.IO.File.Copy(useNextjs ? assetsPath + "/react/next-tsconfig.json" : assetsPath + "/react/react-tsconfig.json", directory + "/frontend/tsconfig.json", true);
             }
 
             // need to run commands all at once to stay in proper directory
@@ -106,7 +106,7 @@ namespace WebStarterkit.CliConfig
 
         public static void CreateFlutterApp(List<Package> packages, string directory, string assetsPath)
         {
-            HelperMethods.CopyDirectory(assetsPath + "flutter", directory + "/frontend", true);
+            HelperMethods.CopyDirectory(assetsPath + "/flutter", directory + "/frontend", true);
 
 
             string command = "cd " + directory + "/frontend";
