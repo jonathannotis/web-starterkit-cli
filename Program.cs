@@ -22,10 +22,14 @@ namespace WebStarterkit
     {
         public static void Main(string[] args)
         {
+            string? homebrewCellarPath = Environment.GetEnvironmentVariable("HOMEBREW_CELLAR");
+            string? baseDirectory = Path.Combine(homebrewCellarPath, "webstart", "1.0.1");
 
             string frontend = args[0];
             string backend = args[1];
-            string directoryName = args[2];
+            string directory = args[2];
+
+            string assetsPath = Path.Combine(baseDirectory, "bin", "assets");
 
             bool typescript = args.Contains("--typescript"); // typescript/javascript
             bool yarn = args.Contains("--yarn"); // yarn/npm
@@ -36,30 +40,30 @@ namespace WebStarterkit
             List<Package> packages = flags.Item1;
 
             // create project directories
-            System.IO.Directory.CreateDirectory(directoryName);
-            System.IO.Directory.CreateDirectory(directoryName + "/frontend");
-            System.IO.Directory.CreateDirectory(directoryName + "/backend");
+            System.IO.Directory.CreateDirectory(directory);
+            System.IO.Directory.CreateDirectory(directory + "/frontend");
+            System.IO.Directory.CreateDirectory(directory + "/backend");
 
             // Handle frontend input
             switch (frontend)
             {
                 case "react":
-                    FrontendConfig.CreateReactApp(packages, false, directoryName, typescript, yarn);
+                    FrontendConfig.CreateReactApp(packages, false, directory, assetsPath, typescript, yarn);
                     break;
                 case "next":
-                    FrontendConfig.CreateReactApp(packages, true, directoryName, typescript, yarn);
+                    FrontendConfig.CreateReactApp(packages, true, directory, assetsPath, typescript, yarn);
                     break;
                 case "svelte":
-                    FrontendConfig.CreateSvelteApp(packages, directoryName, typescript, yarn);
+                    FrontendConfig.CreateSvelteApp(packages, directory, assetsPath, typescript, yarn);
                     break;
                 case "vue":
-                    FrontendConfig.CreateVueApp(packages, directoryName, typescript, yarn);
+                    FrontendConfig.CreateVueApp(packages, directory, assetsPath, typescript, yarn);
                     break;
                 case "angular":
-                    FrontendConfig.CreateAngularApp(packages, directoryName, yarn);
+                    FrontendConfig.CreateAngularApp(packages, directory, assetsPath, yarn);
                     break;
                 case "flutter":
-                    FrontendConfig.CreateFlutterApp(packages, directoryName);
+                    FrontendConfig.CreateFlutterApp(packages, directory, assetsPath);
                     break;
                 default:
                     HelperMethods.RunShellCommand("echo -e \"\033[31;47mYou entered an unsupported frontend frameowork. The program will continue configuration.\033[0m\"");
@@ -70,16 +74,16 @@ namespace WebStarterkit
             switch (backend)
             {
                 case "express":
-                    BackendConfig.CreateExpress(directoryName, yarn, database);
+                    BackendConfig.CreateExpress(directory, assetsPath, yarn, database);
                     break;
                 case "flask":
-                    BackendConfig.CreateFlask(directoryName, database);
+                    BackendConfig.CreateFlask(directory, assetsPath, database);
                     break;
                 case "django":
-                    BackendConfig.CreateDjango(directoryName, database);
+                    BackendConfig.CreateDjango(directory, assetsPath, database);
                     break;
                 case "rails":
-                    BackendConfig.CreateRails(directoryName, database);
+                    BackendConfig.CreateRails(directory, assetsPath, database);
                     break;
                 default:
                     HelperMethods.RunShellCommand("echo -e \"\033[31;47mYou entered an unsupported backend frameowork.\033[0m\"");
