@@ -6,11 +6,11 @@ namespace WebStarterkit.CliConfig
     {
         public static void CreateReactApp(List<Package> packages, bool useNextjs, string directoryName, bool typescript, bool yarn)
         {
-            HelperMethods.CopyDirectory(useNextjs ? "assets/react/next-boilerplate" : "assets/react/react-boilerplate", directoryName + "/frontend", true);
+            HelperMethods.CopyDirectory(useNextjs ? "../assets/react/next-boilerplate" : "../assets/react/react-boilerplate", directoryName + "/frontend", true);
 
             if (typescript)
             {
-                System.IO.File.Copy(useNextjs ? "assets/react/next-tsconfig.json" : "assets/react/react-tsconfig.json", directoryName + "/frontend/tsconfig.json", true);
+                System.IO.File.Copy(useNextjs ? "../assets/react/next-tsconfig.json" : "../assets/react/react-tsconfig.json", directoryName + "/frontend/tsconfig.json", true);
             }
 
             // need to run commands all at once to stay in proper directory
@@ -37,7 +37,7 @@ namespace WebStarterkit.CliConfig
 
         public static void CreateVueApp(List<Package> packages, string directoryName, bool typescript, bool yarn)
         {
-            HelperMethods.CopyDirectory(typescript ? "assets/vue/vue-boilerplate-ts" : "assets/vue/vue-boilerplate", directoryName + "/frontend", true);
+            HelperMethods.CopyDirectory(typescript ? "../assets/vue/vue-boilerplate-ts" : "../assets/vue/vue-boilerplate", directoryName + "/frontend", true);
 
 
             string command = "cd " + directoryName + "/frontend && " + (yarn ? "yarn install" : "npm install");
@@ -60,7 +60,7 @@ namespace WebStarterkit.CliConfig
 
         public static void CreateSvelteApp(List<Package> packages, string directoryName, bool typescript, bool yarn)
         {
-            HelperMethods.CopyDirectory(typescript ? "assets/svelte/svelte-boilerplate-ts" : "assets/svelte/svelte-boilerplate", directoryName + "/frontend", true);
+            HelperMethods.CopyDirectory(typescript ? "../assets/svelte/svelte-boilerplate-ts" : "../assets/svelte/svelte-boilerplate", directoryName + "/frontend", true);
 
 
             string command = "cd " + directoryName + "/frontend && " + (yarn ? "yarn install" : "npm install");
@@ -83,7 +83,7 @@ namespace WebStarterkit.CliConfig
 
         public static void CreateAngularApp(List<Package> packages, string directoryName, bool yarn)
         {
-            HelperMethods.CopyDirectory("assets/angular/angular-boilerplate-sass", directoryName + "/frontend", true);
+            HelperMethods.CopyDirectory("../assets/angular/angular-boilerplate-sass", directoryName + "/frontend", true);
 
 
             string command = "cd " + directoryName + "/frontend && " + (yarn ? "yarn install" : "npm install");
@@ -106,7 +106,7 @@ namespace WebStarterkit.CliConfig
 
         public static void CreateFlutterApp(List<Package> packages, string directoryName)
         {
-            HelperMethods.CopyDirectory("assets/flutter", directoryName + "/frontend", true);
+            HelperMethods.CopyDirectory("../assets/flutter", directoryName + "/frontend", true);
 
 
             string command = "cd " + directoryName + "/frontend";
