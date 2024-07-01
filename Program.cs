@@ -22,13 +22,42 @@ namespace WebStarterkit
     {
         public static void Main(string[] args)
         {
-            string homebrewCellarPath = "/usr/local/Cellar/";
+            if (args.Any(arg => Regex.IsMatch(arg, @"^(-h|--help)$")) || args.Length == 0)
+            {
+                HelpPrintout();
+                return;
+            }
 
-            string baseDirectory = Path.Combine(homebrewCellarPath, "webstarter", "1.0.1");
+            const string resetTextFormat = "\u001b[0m";
+            const string boldRedTextFormat = "\u001b[1;31m";
+            const string boldGreenTextFormat = "\u001b[1;32m";
+
+            bool frontendExists = true;
+            bool backendExists = true;
 
             string frontend = args[0];
             string backend = args[1];
             string directory = args[2];
+
+            if (frontend != "react" && frontend != "next" && frontend != "svelte" && frontend != "vue" && frontend != "angular" && frontend != "flutter")
+            {
+                frontendExists = false;
+                backend = args[0];
+            }
+            if (backend != "express" && backend != "flask" && backend != "django" && backend != "rails")
+            {
+                backendExists = false;
+            }
+            if (!frontendExists && !backendExists)
+            {
+                HelpPrintout();
+                Console.WriteLine($"{boldRedTextFormat}\nYou did not enter any supported frameworks. Please try again according to the format listed.{resetTextFormat}");
+                return;
+            }
+
+            string homebrewCellarPath = "/usr/local/Cellar/";
+
+            string baseDirectory = Path.Combine(homebrewCellarPath, "webstarter", "1.0.1");
 
             string assetsPath = Path.Combine(baseDirectory, "bin", "assets");
 
@@ -42,8 +71,14 @@ namespace WebStarterkit
 
             // create project directories
             System.IO.Directory.CreateDirectory(directory);
-            System.IO.Directory.CreateDirectory(directory + "/frontend");
-            System.IO.Directory.CreateDirectory(directory + "/backend");
+            if (frontendExists)
+            {
+                System.IO.Directory.CreateDirectory(directory + "/frontend");
+            }
+            if (backendExists)
+            {
+                System.IO.Directory.CreateDirectory(directory + "/backend");
+            }
 
             // Handle frontend input
             switch (frontend)
@@ -67,7 +102,7 @@ namespace WebStarterkit
                     FrontendConfig.CreateFlutterApp(packages, directory, assetsPath);
                     break;
                 default:
-                    HelperMethods.RunShellCommand("echo -e \"\033[31;47mYou entered an unsupported frontend frameowork. The program will continue configuration.\033[0m\"");
+                    Console.WriteLine($"{boldRedTextFormat}You entered an unsupported frontend framework. The program will continue configuration.{resetTextFormat}");
                     break;
             }
 
@@ -87,10 +122,10 @@ namespace WebStarterkit
                     BackendConfig.CreateRails(directory, assetsPath, database);
                     break;
                 default:
-                    HelperMethods.RunShellCommand("echo -e \"\033[31;47mYou entered an unsupported backend frameowork.\033[0m\"");
+                    Console.WriteLine($"{boldRedTextFormat}You entered an unsupported backend framework.{resetTextFormat}");
                     break;
             }
-            HelperMethods.RunShellCommand("echo -e \"\033[31;47mThank you. Your project is fully configured. If you have any issues please report them on Github at https://github.com/jonathannotis/web-starterkit-cli\033[0m\"");
+            Console.WriteLine($"{boldGreenTextFormat}Your project is fully configured!\nCheck the full documentation, report issues, or star our repository at https://github.com/jonathannotis/web-starterkit-cli{resetTextFormat}");
         }
 
         // Retrieves and organizes args that do not have a fixed index in the command 
@@ -138,6 +173,31 @@ namespace WebStarterkit
             }
 
             return new Tuple<List<Package>, string>(packages, database);
+        }
+
+        private static void HelpPrintout()
+        {
+            const string resetTextFormat = "\u001b[0m";
+            const string boldGreenTextFormat = "\u001b[1;32m";
+            Console.WriteLine(
+                "Usage:\n" +
+                "  webstarter <frontend> <backend> <appname> [options]\n\n" +
+                "Parameters:\n" +
+                "  <frontend>\t\t\tFrontend framework/library (e.g., react, vue, angular)\n" +
+                "  <backend>\t\t\tBackend framework/language (e.g., express, django, flask)\n" +
+                "  <appname>\t\t\tName of the application\n\n" +
+                "Options:\n" +
+                "  -p <dependencies>\t\tComma-separated list of additional dependencies\n" +
+                "  \t\t\t\t(e.g., -p axios,redux)\n" +
+                "  -P <devDependencies>\t\tComma-separated list of additional dev dependencies\n" +
+                "  \t\t\t\t(e.g., -P eslint,prettier)\n" +
+                "  -d <database>\t\t\tDatabase to use (mongodb, mysql, or sqlite)\n" +
+                "  --typescript\t\t\tUse TypeScript instead of JavaScript\n" +
+                "  --yarn\t\t\tUse Yarn as the package manager instead of npm\n" +
+                "  -h, --help\t\t\tShow this help message and exit\n\n" +
+                $"{boldGreenTextFormat}Check the full documentation, report issues, or star our repository at https://github.com/jonathannotis/web-starterkit-cli{resetTextFormat}"
+            );
+
         }
     }
 }

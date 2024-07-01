@@ -9,7 +9,26 @@ brew install webstarter
 ## Usage
 
 ```
-webstarter <frontend> <backend> <appname> -p <dependencies> -P <devDependencies> -d <database> --typescript --yarn
+webstarter <frontend> <backend> <appname> [options]
+```
+
+## **Options**
+
+```
+Parameters:
+  <frontend>                  Frontend framework/library
+  <backend>                   Backend framework/language
+  <appname>                   Name of the application
+
+Options:
+  -p <dependencies>           Comma-separated list of additional dependencies
+                              (e.g., -p axios,redux)
+  -P <devDependencies>        Comma-separated list of additional dev dependencies
+                              (e.g., -P eslint,prettier)
+  -d <database>               Database to use (mongodb, mysql, or sqlite)
+  --typescript                Use TypeScript instead of JavaScript
+  --yarn                      Use Yarn as the package manager instead of npm
+  -h, --help                  Show this help message and exit
 ```
 
 ## **Frontend Options**
