@@ -1,4 +1,4 @@
-# Web Starterkit Cli
+# Web Starterkit CLI
 
 ## Install
 
