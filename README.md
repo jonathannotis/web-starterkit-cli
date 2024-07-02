@@ -31,7 +31,7 @@ webstarter <frontend> <backend> <appname> [options]
 --typescript                Use TypeScript instead of JavaScript
 --yarn                      Use Yarn as the package manager instead of npm
 -h, --help                  Show this help message and exit
--v, --version               Show version and exit
+-V, --version               Show version and exit
 
 ```
 

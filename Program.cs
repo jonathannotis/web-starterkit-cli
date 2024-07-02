@@ -29,14 +29,21 @@ namespace WebStarterkit
             const string boldGreenTextFormat = "\u001b[1;32m";
 
             // Check for help flag or empty command
-            if (args.Any(arg => Regex.IsMatch(arg, @"^(-h|--help)$")) || args.Length == 0)
+            if (args.Length == 0 || args.Any(arg => Regex.IsMatch(arg, @"^(-h|--help)$")))
             {
                 HelperMethods.HelpPrintout();
                 return;
             }
-            else if (args.Any(arg => Regex.IsMatch(arg, @"^(-v|--version)$")))
+            else if (args.Any(arg => Regex.IsMatch(arg, @"^(-V|--version)$")))
             {
                 Console.WriteLine($"{boldGreenTextFormat}{version}{resetTextFormat}");
+                return;
+            }
+            else if (args.Length < 3)
+            {
+                HelperMethods.HelpPrintout();
+                Console.WriteLine($"{boldRedTextFormat}\nYou did not enter all required parameters. Please try again according to the format listed.{resetTextFormat}");
+                return;
             }
 
 
