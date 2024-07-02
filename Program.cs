@@ -20,19 +20,26 @@ namespace WebStarterkit
     */
     public class WebStarterkit
     {
+        private const string version = "v1.0.2";
         public static void Main(string[] args)
         {
+            // Text coloring values 
+            const string resetTextFormat = "\u001b[0m";
+            const string boldRedTextFormat = "\u001b[1;31m";
+            const string boldGreenTextFormat = "\u001b[1;32m";
+
             // Check for help flag or empty command
             if (args.Any(arg => Regex.IsMatch(arg, @"^(-h|--help)$")) || args.Length == 0)
             {
                 HelperMethods.HelpPrintout();
                 return;
             }
+            else if (args.Any(arg => Regex.IsMatch(arg, @"^(-v|--version)$")))
+            {
+                Console.WriteLine($"{boldGreenTextFormat}{version}{resetTextFormat}");
+            }
 
-            // Text coloring values 
-            const string resetTextFormat = "\u001b[0m";
-            const string boldRedTextFormat = "\u001b[1;31m";
-            const string boldGreenTextFormat = "\u001b[1;32m";
+
 
             bool frontendExists = true;
             bool backendExists = true;

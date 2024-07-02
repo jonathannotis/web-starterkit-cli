@@ -75,7 +75,8 @@ namespace WebStarterkit.CliConfig
                 "  -d <database>\t\t\tDatabase to use (mongodb, mysql, or sqlite)\n" +
                 "  --typescript\t\t\tUse TypeScript instead of JavaScript\n" +
                 "  --yarn\t\t\tUse Yarn as the package manager instead of npm\n" +
-                "  -h, --help\t\t\tShow this help message and exit\n\n" +
+                "  -h, --help\t\t\tShow this help message and exit\n" +
+                "  -v, --version\t\t\tShow version and exit\n\n" +
                 $"{boldGreenTextFormat}Check the full documentation, report issues, or star our repository at https://github.com/jonathannotis/web-starterkit-cli{resetTextFormat}"
             );
 
