@@ -28,10 +28,6 @@ namespace WebStarterkit
             const string boldRedTextFormat = "\u001b[1;31m";
             const string boldGreenTextFormat = "\u001b[1;32m";
 
-            string frontend = "";
-            string backend = "";
-            string directory = "";
-
             // Check for help flag or empty command
             if (args.Length == 0 || args.Any(arg => Regex.IsMatch(arg, @"^(-h|--help)$")))
             {
@@ -49,19 +45,15 @@ namespace WebStarterkit
                 Console.WriteLine($"{boldRedTextFormat}\nYou did not enter all required parameters. Please try again according to the format listed.{resetTextFormat}");
                 return;
             }
-            else
-            {
-                frontend = args[0];
-                backend = args[1];
-                directory = args[2];
-            }
 
 
 
             bool frontendExists = true;
             bool backendExists = true;
 
-
+            string frontend = args[0];
+            string backend = args[1];
+            string directory = args[2];
 
             if (frontend != "react" && frontend != "next" && frontend != "svelte" && frontend != "vue" && frontend != "angular" && frontend != "flutter")
             {
@@ -166,6 +158,7 @@ namespace WebStarterkit
                 {
                     atDependencies = false;
                     atDevDependencies = false;
+                    continue;
                 }
                 else if (Regex.IsMatch(args[i], @"^-d$"))
                 {
@@ -173,16 +166,19 @@ namespace WebStarterkit
                     atDevDependencies = false;
                     i++;
                     database = args[i];
+                    continue;
                 }
                 else if (Regex.IsMatch(args[i], @"^-p$"))
                 {
                     atDependencies = true;
                     atDevDependencies = false;
+                    continue;
                 }
                 else if (Regex.IsMatch(args[i], @"^-P$"))
                 {
                     atDevDependencies = true;
                     atDependencies = false;
+                    continue;
                 }
                 else if (atDependencies || atDevDependencies)
                 {
