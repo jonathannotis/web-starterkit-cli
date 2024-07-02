@@ -6,12 +6,12 @@ namespace WebStarterkit
     public class Package
     {
         public string name;
-        public bool devDependency;
+        public bool isDevDependency;
 
-        public Package(string name, bool devDependency)
+        public Package(string name, bool isDevDependency)
         {
             this.name = name;
-            this.devDependency = devDependency;
+            this.isDevDependency = isDevDependency;
         }
     }
 
@@ -22,12 +22,14 @@ namespace WebStarterkit
     {
         public static void Main(string[] args)
         {
+            // Check for help flag or empty command
             if (args.Any(arg => Regex.IsMatch(arg, @"^(-h|--help)$")) || args.Length == 0)
             {
-                HelpPrintout();
+                HelperMethods.HelpPrintout();
                 return;
             }
 
+            // Text coloring values 
             const string resetTextFormat = "\u001b[0m";
             const string boldRedTextFormat = "\u001b[1;31m";
             const string boldGreenTextFormat = "\u001b[1;32m";
@@ -42,7 +44,6 @@ namespace WebStarterkit
             if (frontend != "react" && frontend != "next" && frontend != "svelte" && frontend != "vue" && frontend != "angular" && frontend != "flutter")
             {
                 frontendExists = false;
-                backend = args[0];
             }
             if (backend != "express" && backend != "flask" && backend != "django" && backend != "rails")
             {
@@ -50,7 +51,7 @@ namespace WebStarterkit
             }
             if (!frontendExists && !backendExists)
             {
-                HelpPrintout();
+                HelperMethods.HelpPrintout();
                 Console.WriteLine($"{boldRedTextFormat}\nYou did not enter any supported frameworks. Please try again according to the format listed.{resetTextFormat}");
                 return;
             }
@@ -175,29 +176,8 @@ namespace WebStarterkit
             return new Tuple<List<Package>, string>(packages, database);
         }
 
-        private static void HelpPrintout()
-        {
-            const string resetTextFormat = "\u001b[0m";
-            const string boldGreenTextFormat = "\u001b[1;32m";
-            Console.WriteLine(
-                "Usage:\n" +
-                "  webstarter <frontend> <backend> <appname> [options]\n\n" +
-                "Parameters:\n" +
-                "  <frontend>\t\t\tFrontend framework/library (e.g., react, vue, angular)\n" +
-                "  <backend>\t\t\tBackend framework/language (e.g., express, django, flask)\n" +
-                "  <appname>\t\t\tName of the application\n\n" +
-                "Options:\n" +
-                "  -p <dependencies>\t\tComma-separated list of additional dependencies\n" +
-                "  \t\t\t\t(e.g., -p axios,redux)\n" +
-                "  -P <devDependencies>\t\tComma-separated list of additional dev dependencies\n" +
-                "  \t\t\t\t(e.g., -P eslint,prettier)\n" +
-                "  -d <database>\t\t\tDatabase to use (mongodb, mysql, or sqlite)\n" +
-                "  --typescript\t\t\tUse TypeScript instead of JavaScript\n" +
-                "  --yarn\t\t\tUse Yarn as the package manager instead of npm\n" +
-                "  -h, --help\t\t\tShow this help message and exit\n\n" +
-                $"{boldGreenTextFormat}Check the full documentation, report issues, or star our repository at https://github.com/jonathannotis/web-starterkit-cli{resetTextFormat}"
-            );
 
-        }
+
+
     }
 }

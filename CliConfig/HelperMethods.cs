@@ -22,9 +22,6 @@ namespace WebStarterkit.CliConfig
 
         }
 
-
-
-
         // via https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
         public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
         {
@@ -57,6 +54,31 @@ namespace WebStarterkit.CliConfig
                     CopyDirectory(subDir.FullName, newDestinationDir, true);
                 }
             }
+        }
+
+        public static void HelpPrintout()
+        {
+            const string resetTextFormat = "\u001b[0m";
+            const string boldGreenTextFormat = "\u001b[1;32m";
+            Console.WriteLine(
+                "Usage:\n" +
+                "  webstarter <frontend> <backend> <appname> [options]\n\n" +
+                "Parameters:\n" +
+                "  <frontend>\t\t\tFrontend framework/library (e.g., react, vue, angular)\n" +
+                "  <backend>\t\t\tBackend framework/language (e.g., express, django, flask)\n" +
+                "  <appname>\t\t\tName of the application\n\n" +
+                "Options:\n" +
+                "  -p <dependencies>\t\tComma-separated list of additional dependencies\n" +
+                "  \t\t\t\t(e.g., -p axios,redux)\n" +
+                "  -P <devDependencies>\t\tComma-separated list of additional dev dependencies\n" +
+                "  \t\t\t\t(e.g., -P eslint,prettier)\n" +
+                "  -d <database>\t\t\tDatabase to use (mongodb, mysql, or sqlite)\n" +
+                "  --typescript\t\t\tUse TypeScript instead of JavaScript\n" +
+                "  --yarn\t\t\tUse Yarn as the package manager instead of npm\n" +
+                "  -h, --help\t\t\tShow this help message and exit\n\n" +
+                $"{boldGreenTextFormat}Check the full documentation, report issues, or star our repository at https://github.com/jonathannotis/web-starterkit-cli{resetTextFormat}"
+            );
+
         }
 
     }
