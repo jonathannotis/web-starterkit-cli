@@ -32,18 +32,18 @@ namespace WebStarterkit
             if (args.Length == 0 || args.Any(arg => Regex.IsMatch(arg, @"^(-h|--help)$")))
             {
                 HelperMethods.HelpPrintout();
-                return;
+                Environment.Exit(0);
             }
             else if (args.Any(arg => Regex.IsMatch(arg, @"^(-V|--version)$")))
             {
                 Console.WriteLine($"{boldGreenTextFormat}{version}{resetTextFormat}");
-                return;
+                Environment.Exit(0);
             }
             else if (args.Length < 3)
             {
                 HelperMethods.HelpPrintout();
                 Console.WriteLine($"{boldRedTextFormat}\nYou did not enter all required parameters. Please try again according to the format listed.{resetTextFormat}");
-                return;
+                Environment.Exit(1);
             }
 
 
@@ -67,7 +67,7 @@ namespace WebStarterkit
             {
                 HelperMethods.HelpPrintout();
                 Console.WriteLine($"{boldRedTextFormat}\nYou did not enter any supported frameworks. Please try again according to the format listed.{resetTextFormat}");
-                return;
+                Environment.Exit(0);
             }
 
             string homebrewCellarPath = "/usr/local/Cellar/";
