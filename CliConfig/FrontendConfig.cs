@@ -18,7 +18,7 @@ namespace WebStarterkit.CliConfig
 
             packages?.ForEach(package =>
             {
-                if (package.devDependency)
+                if (package.isDevDependency)
                 {
                     command += (yarn ? (" && yarn add -D " + package.name) : (" && npm install " + package.name + " --save-dev"));
                 }
@@ -44,7 +44,7 @@ namespace WebStarterkit.CliConfig
 
             packages?.ForEach(package =>
             {
-                if (package.devDependency)
+                if (package.isDevDependency)
                 {
                     command += (yarn ? (" && yarn add -D " + package.name) : (" && npm install " + package.name + " --save-dev"));
                 }
@@ -67,7 +67,7 @@ namespace WebStarterkit.CliConfig
 
             packages?.ForEach(package =>
             {
-                if (package.devDependency)
+                if (package.isDevDependency)
                 {
                     command += (yarn ? (" && yarn add -D " + package.name) : (" && npm install " + package.name + " --save-dev"));
                 }
@@ -90,7 +90,7 @@ namespace WebStarterkit.CliConfig
 
             packages?.ForEach(package =>
             {
-                if (package.devDependency)
+                if (package.isDevDependency)
                 {
                     command += (yarn ? (" && yarn add -D " + package.name) : (" && npm install " + package.name + " --save-dev"));
                 }
@@ -113,7 +113,7 @@ namespace WebStarterkit.CliConfig
 
             packages?.ForEach(package =>
             {
-                if (package.devDependency)
+                if (package.isDevDependency)
                 {
                     command += ((" && flutter pub add --dev " + package.name));
                 }
